@@ -24,6 +24,9 @@ meshGateway:
 controller:
   enabled: true
 
+crds:
+  enabled: true
+
 ui:
   enabled: true
   service:
