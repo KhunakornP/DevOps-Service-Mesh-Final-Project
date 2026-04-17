@@ -9,8 +9,9 @@ This project uses source code attributed to the following projects
 ### Prerequisites
 The following application/command line tool must be installed:
 
-- AWS CLI
-- kubectl
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
+- [kubectl](https://kubernetes.io/docs/setup/)
+- [HELM](https://helm.sh/docs/intro/install/)
 
 ### Hosting the Application on AWS
 
@@ -75,6 +76,39 @@ The following application/command line tool must be installed:
 	```
 	Notice that the paymentservice has the status CrashLoopBackOff.
 	We will need to configure Consul to get the pod running.
+
+7. Create an EBS (Elastic Block Storage) for Consul
+	```
+	kubectl apply -f config-gp3.yaml
+	```
+
+8. Creating the Consul data center
+	```
+	# register the Consul repository
+	helm repo add hashicorp https://helm.releases.hashicorp.com
+
+	# install Consul on Kubernetes
+	helm install eks hashicorp/consul --version 1.0.0 --values consul-values.yaml --set global.datacenter=eks
+	```
+
+9. Check your Kubernetes pods
+	```kubectl get pods``` should report similar pods, depending on what you name your data center
+	```
+	NAME                                               READY   STATUS    RESTARTS   AGE
+	eks-consul-connect-injector-65cb48f9bb-bwcht       1/1     Running   0          45s
+	eks-consul-mesh-gateway-66bf4dd558-gwkfz           1/1     Running   0          23m
+	eks-consul-server-0                                1/1     Running   0          23m
+	eks-consul-webhook-cert-manager-845479654f-92pth   1/1     Running   0          23m
+	```
+
+10. Recreate the containers to inject Consul sidecar
+	```
+	# destroy existing services
+	kubectl delete -f config.yaml
+
+	# re-create the services with a Consul ready configuration
+	kubectl apply -f config-consul.yaml
+	```
 
 ### Demo project accompanying a [Consul crash course video](https://www.youtube.com/watch?v=s3I1kKKfjtQ) on YouTube
 
