@@ -38,7 +38,7 @@ module "eks" {
   version = "19.16.0"
 
   cluster_name = var.k8s_cluster_name
-  cluster_version = var.k8s_version
+  cluster_version = "1.30"
 
   subnet_ids = module.myapp-vpc.private_subnets
   vpc_id = module.myapp-vpc.vpc_id
@@ -67,7 +67,7 @@ module "eks" {
       max_size     = 3
       desired_size = 3
 
-      instance_types = ["t2.small"]
+      instance_types = var.instance_types
 
       # add permission for ebs storage creation for Consul
       iam_role_additional_policies = {
