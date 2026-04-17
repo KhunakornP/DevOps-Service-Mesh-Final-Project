@@ -3,7 +3,7 @@ Scripts for creating service mesh platform using Consul for building the Kuberne
 
 This project uses source code attributed to the following projects 
 1. [Consul crash course video](https://www.youtube.com/watch?v=s3I1kKKfjtQ) on YouTube
-
+2. [Google Cloud Platform Demo](https://github.com/GoogleCloudPlatform/microservices-demo)
 
 ## Setting up the Project
 ### Prerequisites
@@ -49,6 +49,32 @@ The following application/command line tool must be installed:
 	terraform init -upgrade
 	terraform apply -var-file {your .tfvars file here}
 	```
+
+5. After the resources are created, run the application using Kubernetes
+	```
+	# go to the kubernetes directory (assuming current directory is terraform)
+	cd ..
+	cd kubernetes
+
+	# authenticate to AWS CLI
+	aws login
+	# or
+	aws config
+
+	# run the images
+	kubectl apply -f config.yaml
+	```
+
+6. Check the status of the application
+	```
+	# check pods
+	kubectl get pods
+
+	# check services
+	kubeclt get services
+	```
+	Notice that the paymentservice has the status CrashLoopBackOff.
+	We will need to configure Consul to get the pod running.
 
 ### Demo project accompanying a [Consul crash course video](https://www.youtube.com/watch?v=s3I1kKKfjtQ) on YouTube
 
