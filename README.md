@@ -62,6 +62,11 @@ The following application/command line tool must be installed:
 	# or
 	aws config
 
+	# change the kubernetes config to the EKS on AWS
+	aws eks update-kubeconfig --region {your region} --name {your app name}
+	# example
+	aws eks update-kubeconfig --region ap-southeast-1 --name myapp-eks-cluster
+
 	# run the images
 	kubectl apply -f config.yaml
 	```
