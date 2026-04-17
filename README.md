@@ -1,6 +1,55 @@
 # DevOps-Service-Mesh-Final-Project
 Scripts for creating service mesh platform using Consul for building the Kubernetes multi cluster, and multi cloud system with platform failover.
 
+This project uses source code attributed to the following projects 
+1. [Consul crash course video](https://www.youtube.com/watch?v=s3I1kKKfjtQ) on YouTube
+
+
+## Setting up the Project
+### Prerequisites
+The following application/command line tool must be installed:
+
+- AWS CLI
+- kubectl
+
+### Hosting the Application on AWS
+
+1. Navigate to the ```terraform``` directory
+	```
+	cd terraform
+	```
+
+
+2. Create a .tfvars file for environment variables
+	```
+	# windows
+	type nul > terraform.tfvars
+
+	# Mac / Linux
+	touch terraform.tfvars
+	```
+
+
+3. Configure the following environment variables
+	```
+	aws_access_key_id     = "your-aws-access-key-id"
+	aws_secret_access_key = "your-aws-access-secret-key"
+	```
+	The following variables are optionally configurable
+	```
+	aws_region       = "ap-southeast-1" (The AWS region for resources)
+	instance_types   = ["t3.small"]     (AWS free tier supports t3, t4 small for accounts after 2015)
+	k8s_cluster_name = "my-k8-cluster"  (Kubenetes cluster name containing letters, 0-9, or -)
+	k8_version       = "1.30"           (The Kubernetes version to deploy. 1.33 < is depricated after of June 2026)
+	```
+
+
+4. Create the AWS resources
+	```
+	terraform init -upgrade
+	terraform apply -var-file {your .tfvars file here}
+	```
+
 ### Demo project accompanying a [Consul crash course video](https://www.youtube.com/watch?v=s3I1kKKfjtQ) on YouTube
 
 
