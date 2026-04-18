@@ -210,4 +210,4 @@ To test the failover, run `kubectl delete deployment shippingservice`. The shopp
 3. Add crds explicitly to consul-values.yaml. For some reason, the lke Consul instance sometimes failed to register
 crds to configure ExportedService. It is added as redundancy.
 4. Change the default Kubernetes version to 1.30 as version 1.27 is already deprecated on AWS.
-5. Change the terraform AWS provider version from "~> 5.3" to "~> 5.8"
+5. Change the terraform AWS provider version from `"~> 5.3"` to `"~> 5.8"`
