@@ -7,11 +7,12 @@ This project uses source code attributed to the following projects
 
 ## Setting up the Project
 ### Prerequisites
-The following application/command line tool must be installed:
+The following application/command line tools must be installed:
 
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
-- [kubectl](https://kubernetes.io/docs/setup/)
+- [Kubernetes](https://kubernetes.io/docs/setup/)
 - [HELM](https://helm.sh/docs/intro/install/)
+- [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 
 Additionally, to run the terraform script you will need an AWS account with sufficient credits.
 
@@ -82,7 +83,7 @@ Additionally, to run the terraform script you will need an AWS account with suff
 	kubeclt get services
 	```
 	Notice that the paymentservice has the status CrashLoopBackOff.
-	We will need to configure Consul to get the pod running.
+	This is intentional.
 
 7. Create an EBS (Elastic Block Storage) for Consul
 	```
